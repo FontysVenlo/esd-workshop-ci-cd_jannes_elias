@@ -94,11 +94,20 @@ jobs:
 
       # TODO(7): Ensure your Vite config has correct base for Pages:
       #   base: "/<repo-name>/"
-      - name: Build static site
-        run: npm run build   # must output to ./dist
+      - name: Build static site with correct base
+        run: |
+          
+          if [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
+            BASE="/"
+          else
+            BASE="/${{ github.event.repository.name }}/"
+          fi
+          echo "Using base: $BASE"
+          VITE_BASE_PATH="$BASE" npm run build   
 
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
       - uses: actions/deploy-pages@v4
+
 
