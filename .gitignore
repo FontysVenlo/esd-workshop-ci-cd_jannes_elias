@@ -1,5 +1,33 @@
+# Node / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency lock files (optional)
+# If you want to allow students to use yarn/pnpm, ignore others
+pnpm-lock.yaml
+yarn.lock
+
+# Build output
+dist/
+coverage/
+*.log
+
+# Editor / OS cruft
 .DS_Store
-.idea/*
-.gradle/*
-out/
-build/
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# GitHub Actions artifacts (local debug)
+.github/*.log
