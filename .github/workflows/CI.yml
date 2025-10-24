@@ -1,0 +1,104 @@
+# .github/workflows/ci-cd.yml
+name: CI & CD (Starter with TODOs)
+
+on:
+  push:
+    branches: [ Workshop-app ]
+  pull_request:
+    branches: [ Workshop-app ]
+
+permissions:
+  contents: read
+  pages: write          # needed for GitHub Pages deploy
+  id-token: write
+
+# Cancel older in-flight runs for the same branch/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # =========================
+  # CI: quality gates only
+  # =========================
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # TODO(1): Setup Node **with dependency caching**
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          # HINT: enable npm cache here (one line)
+
+      # Install deps (fast with cache after first run)
+      - run: npm ci
+
+      # TODO(2): Add a **lint** step that fails on issues
+      # - name: Lint
+      #   run: npm run lint
+
+      # TODO(3): Run **tests with coverage**
+      # - name: Test with coverage
+      #   run: npm test
+
+      # TODO(4): **Enforce coverage >= 80%** and fail if under
+      # - name: Enforce coverage threshold (80%)
+      #   run: |
+      #     node -e "
+      #       const fs = require('fs');
+      #       const p='coverage/coverage-summary.json';
+      #       if(!fs.existsSync(p)){ console.error('No coverage summary'); process.exit(1); }
+      #       const s=JSON.parse(fs.readFileSync(p,'utf8')).total||{};
+      #       const vals=[s.lines?.pct,s.statements?.pct,s.branches?.pct,s.functions?.pct].map(v=>v??0);
+      #       const ok=vals.every(v=>v>=80);
+      #       console.log('Coverage %', {lines:s.lines?.pct,statements:s.statements?.pct,branches:s.branches?.pct,functions:s.functions?.pct});
+      #       if(!ok){ console.error('Coverage below 80%'); process.exit(2); }
+      #     "
+
+      # TODO(5): Upload **coverage artifact** so reviewers can download the HTML report
+      # - name: Upload coverage artifact
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: coverage
+      #     path: coverage
+      #     if-no-files-found: error
+
+      # OPTIONAL TODO(6): Add a brief **run summary**
+      # - name: Post CI summary
+      #   if: always()
+      #   run: |
+      #     echo "## CI Summary" >> $GITHUB_STEP_SUMMARY
+      #     echo "- Lint: (fill)" >> $GITHUB_STEP_SUMMARY
+      #     echo "- Coverage: see artifact" >> $GITHUB_STEP_SUMMARY
+
+  # =========================
+  # CD: deploy static site to GitHub Pages
+  # =========================
+  deploy:
+    needs: ci
+    # Only deploy from main and only if CI succeeded
+    if: github.ref == 'refs/heads/main' && needs.ci.result == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm   # CD also benefits from cache
+
+      - run: npm ci
+
+      # TODO(7): Ensure your Vite config has correct base for Pages:
+      #   base: "/<repo-name>/"
+      - name: Build static site
+        run: npm run build   # must output to ./dist
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
