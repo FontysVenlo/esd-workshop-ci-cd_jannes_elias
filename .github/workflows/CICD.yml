@@ -79,8 +79,7 @@ jobs:
   # =========================
   deploy:
     needs: ci
-    # Only deploy from main and only if CI succeeded
-    if: github.ref == 'refs/heads/main' && needs.ci.result == 'success'
+    if: (github.ref_name == 'main' || github.ref_name == 'Workshop-app') && needs.ci.result == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -102,3 +101,4 @@ jobs:
         with:
           path: dist
       - uses: actions/deploy-pages@v4
+
