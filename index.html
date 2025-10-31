@@ -1,82 +1,82 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CI/CD Workshop Calculator</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background: radial-gradient(circle at top left, #eef2ff, #c7d2fe);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    h1 {
-      color: #1e3a8a;
-      margin-bottom: 0.5rem;
-    }
-    #message {
-      margin-bottom: 1.5rem;
-      color: #4f46e5;
-    }
-    .calc {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 2rem;
-      width: 260px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.5rem;
-    }
-    input {
-      grid-column: 1 / -1;
-      font-size: 1.5rem;
-      text-align: right;
-      padding: 0.5rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-    button {
-      font-size: 1.25rem;
-      padding: 0.5rem;
-      border: none;
-      border-radius: 0.5rem;
-      background: #4f46e5;
-      color: white;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background: #4338ca;
-    }
-    footer {
-      margin-top: 1rem;
-      font-size: 0.875rem;
-      color: #6b7280;
-    }
-  </style>
-</head>
-<body>
-<h1>CI/CD Workshop Calculator</h1>
-<p id="message">Deployed via GitHub Actions 🚀</p>
+  <!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CI/CD Workshop Calculator</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background: radial-gradient(circle at top left, #eef2ff, #c7d2fe);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      h1 {
+        color: #1e3a8a;
+        margin-bottom: 0.5rem;
+      }
+      #message {
+        margin-bottom: 1.5rem;
+        color: #4f46e5;
+      }
+      .calc {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 2rem;
+        width: 260px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+      }
+      input {
+        grid-column: 1 / -1;
+        font-size: 1.5rem;
+        text-align: right;
+        padding: 0.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      button {
+        font-size: 1.25rem;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        background: #4f46e5;
+        color: white;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: #4338ca;
+      }
+      footer {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>CI/CD Workshop Calculator</h1>
+  <p id="message">Deployed via GitHub Actions 🚀</p>
 
-<div class="calc">
-  <input id="display" readonly />
-  <button>7</button><button>8</button><button>9</button><button>/</button>
-  <button>4</button><button>5</button><button>6</button><button>*</button>
-  <button>1</button><button>2</button><button>3</button><button>-</button>
-  <button>0</button><button>.</button><button>=</button><button>+</button>
-  <button id="clear" style="grid-column: 1 / -1; background:#ef4444;">C</button>
-</div>
+  <div class="calc">
+    <input id="display" readonly />
+    <button>7</button><button>8</button><button>9</button><button>/</button>
+    <button>4</button><button>5</button><button>6</button><button>*</button>
+    <button>1</button><button>2</button><button>3</button><button>-</button>
+    <button>0</button><button>.</button><button>=</button><button>+</button>
+    <button id="clear" style="grid-column: 1 / -1; background:#ef4444;">C</button>
+  </div>
 
-<footer>Part of the CI/CD Workshop • Test → Build → Deploy</footer>
+  <footer>Part of the CI/CD Workshop • Test → Build → Deploy</footer>
 
-<script type="module" src="./src/main/main.ts"></script>
-</body>
-</html>
+  <script type="module" src="./src/main/main.ts"></script>
+  </body>
+  </html>

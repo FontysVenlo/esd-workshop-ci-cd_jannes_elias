@@ -1,4 +1,3 @@
-
 import { describe, it, expect } from "vitest";
 import { sum, average, increment } from "../src/lib/calc";
 
